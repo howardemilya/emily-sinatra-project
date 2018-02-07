@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> Secret Recipe Tracker </title>
+  </head>
+  <body>
+    <%= yield %>
+    <br>
+    <a href="/">Home</a>
+      <% if !logged_in? %>
+        <a href="/signup">Sign Up</a>
+      <% end %>
+      <% if !logged_in? %>
+        <a href="/login">Log In</a>
+      <% end %>
+      <% if logged_in? %>
+        <a href="/recipes">Your Recipes</a>
+        <a href="/logout">Log Out</a>
+      <% end %>
+
+  </body>
+
+</html>
