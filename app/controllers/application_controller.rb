@@ -56,6 +56,21 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post '/recipes' do
+
+    @recipe = Recipe.create(params[:recipe])
+    @recipe.user_id = session[:user_id]
+    @recipe.save
+    @ingredients = params[:ingredients]
+    @ingredients.each do |ingredient_hash|
+      if !ingredient_hash["amount"].empty && !ingredient_hash["name"].empty?
+        @recipe.ingredients << Ingredient.create(ingredient_hash)
+        @recipe.save
+      end
+    end
+
+  end
+
 
 
 end

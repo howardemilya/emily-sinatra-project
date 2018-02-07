@@ -1,11 +1,26 @@
 Add NEW Recipe!
 
-Recipe Name
+<form action="/recipes" method="post">
+Recipe Name: <input type="text" name="recipe[name]"><br>
 
-Prep Time:
+Prep Time:<input type="text" name="recipe[prep_time]"><br>
 
-Cook Time:
+Cook Time:<input type="text" name="recipe[cook_time]"><br>
 
 Ingredients:
+<br>
+1.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+2.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+3.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+4.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+5.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+6.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+7.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+8.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+9.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+10. Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
 
-Instructions:
+Instructions: <input type="text" name="recipe[instructions]"><br>
+
+<input type="submit" value="ADD RECIPE">
+</form>
