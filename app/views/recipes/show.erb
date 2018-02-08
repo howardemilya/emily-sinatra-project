@@ -1,0 +1,11 @@
+<h1><%=@recipe.name %></h1>
+<h4>Prep Time: <%=@recipe.prep_time %></h4>
+<h4>Cook Time: <%=@recipe.cook_time %></h4>
+<h4>Ingredients:</h4>
+<% @recipe.ingredients.each do |ingredient| %>
+  <p><%=ingredient.amount%> <%=ingredient.name%></p>
+<% end %>
+<h4>Instructions:</h4>
+<p><%=@recipe.instructions%></p>
+<a href="/recipes/<%=@recipe.id%>/edit">Edit Recipe</a>
+<a href="/recipes/<%=@recipe.id%>/delete">Delete Recipe</a>

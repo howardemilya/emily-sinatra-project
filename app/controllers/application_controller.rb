@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "fwitter_secret"
+    set :session_secret, "secret"
   end
 
   helpers do
@@ -95,10 +95,66 @@ class ApplicationController < Sinatra::Base
   get '/recipes/:id' do
     if logged_in?
       @recipe = Recipe.find_by_id(params[:id])
-      erb :"/recipes/show"
+      erb :'/recipes/show'
     else
       redirect "/login"
     end
+  end
+
+  get '/recipes/:id/edit' do
+    if logged_in?
+      @recipe = Recipe.find_by_id(params[:id])
+      erb :'/recipes/edit'
+    else
+      redirect "/login"
+    end
+  end
+
+  patch "/recipes/:id" do
+    if logged_in?
+      @recipe = Recipe.find(params[:id])
+      if !params[:recipe]["name"].empty?
+        @recipe.name = params[:recipe]["name"]
+      end
+      if !params[:recipe]["cook-time"].empty?
+        @recipe.cook_time = params[:recipe]["cook-time"]
+      end
+      if !params[:recipe]["prep_time"].empty?
+        @recipe.prep_time = params[:recipe]["prep_time"]
+      end
+      if !params[:recipe]["instructions"].empty?
+        @recipe.instructions = params[:recipe]["instructions"]
+      end
+      @recipe.save
+      @ingredients = []
+      if params["existing_ingredients"]
+        params["existing_ingredients"].each do |ingredient|
+          @ingredients << Ingredient.find_by_name(ingredient)
+        end
+      end
+      @new_ingredients = params[:ingredients]
+      @new_ingredients.each do |ingredient_hash|
+        if !ingredient_hash["amount"].empty? && !ingredient_hash["name"].empty?
+          @ingredients << Ingredient.create(ingredient_hash)
+        end
+      end
+      @recipe.ingredients = @ingredients
+      @recipe.save
+
+      redirect "/recipes/#{@recipe.id}"
+    else
+      redirect "/login"
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
+
   end
 
 

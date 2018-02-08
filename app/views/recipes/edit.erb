@@ -1,0 +1,27 @@
+Edit Recipe: <%= @recipe.name %>
+
+<form method="post" action="/recipes/<%=@recipe.id%>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  Recipe Name: <input type="text" name="recipe[name]"><br>
+  Prep Time: <%= @recipe.prep_time %><br>
+  Prep Time: <input type="text" name="recipe[prep_time]"><br>
+  Cook Time: <%= @recipe.cook_time %><br>
+  Cook Time: <input type="text" name="recipe[cook-time]"><br>
+  Ingredients:<br>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <input type="checkbox" name="existing_ingredients[]" value="<%=ingredient.name%>"><%=ingredient.amount%>, <%= ingredient.name%></input><br>
+  <% end %>
+  Additional Ingredients:<br>
+  1.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+  2.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+  3.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+  4.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+  5.  Amount: <input type=text name="ingredients[][amount]"> Ingredient: <input type="text" name="ingredients[][name]"><br>
+  <br>
+  Instructions:<br>
+  <%= @recipe.instructions %><br>
+  New Instructions: <br>
+  <input type="text" name="recipe[instructions]">
+
+  <input type="submit" value="Update Recipe">
+</form>
