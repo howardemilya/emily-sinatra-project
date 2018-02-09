@@ -154,7 +154,22 @@ class ApplicationController < Sinatra::Base
     else
       redirect to '/'
     end
+  end
 
+  get '/users/:slug' do
+    @user = User.find_by(slug: params[:slug])
+    erb :'/users/show'
+  end
+
+  delete "/recipes/:id/delete" do
+    if logged_in?
+      @recipe = Recipe.find_by_id(params[:id])
+      if @recipe.user_id == current_user.id
+        @recipe.delete
+        @recipe.save
+      end
+    end
+    redirect "/recipes"
   end
 
 

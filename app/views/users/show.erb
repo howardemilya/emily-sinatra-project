@@ -1,3 +1,5 @@
-
-
-TEST THIS PAGE
+<%= @user.username %>
+<br>
+<% @user.recipes.each do |recipe| %>
+  <%= recipe.name %>
+<% end %>
